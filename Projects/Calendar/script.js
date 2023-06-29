@@ -24,6 +24,8 @@ const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const calendar = document.getElementById("calendar-body");
 const monthAndYear = document.getElementById("monthAndYear");
 
+let currentDay;
+
 showCalendar(month, year);
 
 function next() {
@@ -48,6 +50,7 @@ function previous() {
 
 function showCalendar(month, year) {
 	let firstDay = new Date(year, month).getDay();
+
 	let daysInMonth = 32 - new Date(year, month, 32).getDate();
 	let today = new Date();
 
@@ -79,6 +82,8 @@ function showCalendar(month, year) {
 					month === today.getMonth()
 				) {
 					cell.classList.add("today");
+					cell.classList.add("current-day");
+					currentDay = parseInt(cellText.data, 10);
 				}
 
 				cell.appendChild(cellText);
@@ -112,3 +117,16 @@ function addNote() {
 	notesItems.append(p);
 	countNotes();
 }
+
+calendar.onclick = (e) => {
+	let elem = document.querySelector(".current-day");
+	if (elem) {
+		elem.classList.remove("current-day");
+	}
+
+	let clickedItem = e.target;
+	clickedItem.classList.add("current-day");
+	let clickedItemValue = clickedItem.innerText;
+	currentDay = clickedItemValue;
+	console.log(currentDay);
+};

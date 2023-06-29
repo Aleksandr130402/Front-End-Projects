@@ -70,6 +70,10 @@ body{
   .today {
     background-color: #e9e9e9;
   }
+
+  .current-day {
+    border: 2px solid green;
+  }
   
   .selected {
     background-color: #007bff;
