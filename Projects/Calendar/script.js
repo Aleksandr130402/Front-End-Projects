@@ -1,5 +1,7 @@
 const calendarNotes = document.getElementById("calendar-notes");
 const notesItems = document.getElementById("calendar-notes-items");
+const noteInp = document.getElementById("note-input");
+const noteButton = document.getElementById("note-button");
 const h2 = document.createElement("h2");
 
 let date = new Date();
@@ -110,10 +112,19 @@ const countNotes = () => {
 	countNotes();
 })();
 
+noteInp.onkeydown = function (e) {
+	if (e.code === "Enter") {
+		addNote();
+	}
+};
+
 function addNote() {
-	const noteInp = document.getElementById("note-input");
+	if (!noteInp.value) {
+		alert("Please, type a correct note!!");
+	}
 	const p = document.createElement("p");
 	p.innerText = noteInp.value;
+	noteInp.value = "";
 	notesItems.append(p);
 	countNotes();
 }
